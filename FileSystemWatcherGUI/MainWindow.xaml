@@ -1,0 +1,65 @@
+﻿<Window x:Class="FileSystemWatcherGUI.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:FileSystemWatcherGUI"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800"
+        ResizeMode="NoResize" Closing="windowClose_onClick"
+        WindowStartupLocation="CenterScreen"
+        >
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="354*"/>
+            <RowDefinition Height="65*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="395*"/>
+            <ColumnDefinition Width="398*"/>
+        </Grid.ColumnDefinitions>
+        <Menu Grid.ColumnSpan="2" Grid.RowSpan="2" Height="421" VerticalAlignment="Top" HorizontalAlignment="Left" Width="794">
+            <MenuItem Header="_File">
+                <MenuItem Name="MenuStartOption" Header="_Start" Click="startMenuOption_onMouseClick" />
+                <MenuItem Name="MenuStopOption"  Header="Sto_p" Click="stopMenuOption_onClick"/>
+                <MenuItem Name="MenuWriteOption" Header="_Write to Database" Click="writeMenuOption_onClick" />
+                <MenuItem Header="_Query Database" MouseDown="queryDatabase_onMouseClick" Click="queryDatabase_onMouseClick" />
+                <Separator />
+                <MenuItem Header="_Exit" Click="exitMenuOption_onClick" />
+            </MenuItem>
+            <MenuItem Header="_Help">
+                <MenuItem Header="_About" Click="MenuAboutOption_onClick" />
+            </MenuItem>
+        </Menu>
+        <ToolBar Height="41" VerticalAlignment="Top" Grid.ColumnSpan="2" Margin="2,21,0,0">
+            <Button Name="StartButton" Content="Start" Click="startButton_onMouseClick" BorderBrush="Black" Margin="8px"/>
+            <Button Name="StopButton" Click="stopButton_onMouseClick" Content="Stop" BorderBrush="Black" Margin="8px"/>
+            <Button Click="writeButton_onMouseClick" Content="Write" BorderBrush="Black" Margin="8px" />
+        </ToolBar>
+
+        <CheckBox Name="IncludeSubdirectiesCB" Margin="99,82,0,0" VerticalAlignment="Top" Grid.Column="1" HorizontalAlignment="Left" Width="155">Include Subdirectories</CheckBox>
+
+        <Label Content="Directory" VerticalAlignment="Top" HorizontalAlignment="Left" Width="91" Margin="23,80,0,0"/>
+
+        <DataGrid Name="DisplayFileChanges" AutoGenerateColumns="False" Margin="0,0,34,10" Grid.ColumnSpan="2" Height="230" 
+                  VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="735" Grid.RowSpan="2" 
+                  IsReadOnly="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="File Name"  Binding="{Binding FileName}" />
+                <DataGridTextColumn Header="Extension" Binding="{Binding Extension}" />
+                <DataGridTextColumn Header="Path" Binding="{Binding Path}" />
+                <DataGridTextColumn Header="Event" Binding="{Binding Event}" />
+                <DataGridTextColumn Header="Timestamp" Binding="{Binding Timestamp}" />
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <TextBox Name="DirectoryField" Margin="179,76,0,0" Height="32" Grid.ColumnSpan="2" HorizontalAlignment="Left" Width="299" VerticalAlignment="Top">
+            
+        </TextBox>
+        
+        <TextBox Name="ExtensionField" Margin="179,127,0,0" Height="32" VerticalAlignment="Top" HorizontalAlignment="Left" Width="100"/>
+        <Label Content="Enter a file extension to watch" VerticalAlignment="Center" Margin="284,129,0,195" Height="32" RenderTransformOrigin="0.167,0.438" Grid.ColumnSpan="2" HorizontalAlignment="Left" Width="316"/>
+        <Label Content="File Extension" Margin="23,129,0,0" HorizontalAlignment="Left" Width="91" Height="32" VerticalAlignment="Top"/>
+    </Grid>
+</Window>
